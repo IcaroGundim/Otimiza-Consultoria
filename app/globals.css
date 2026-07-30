@@ -1,32 +1,35 @@
 @import "tailwindcss";
-
-@font-face {
-  font-family: 'Sentient';
-  src: url('/Sentient-Extralight.woff') format('woff');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Sentient';
-  src: url('/Sentient-LightItalic.woff') format('woff');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
+/* Usado nas transições de entrada/saída do menu mobile (Radix data-state). */
+@import "tw-animate-css";
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  --primary: #FFC700;
-  --primary-foreground: #ffffff;
-  --border: #424242;
+  /* Neutros estruturais */
+  --paper: #ffffff;
+  --ink: #0e0e0d;
+
+  /* Verde bem claro — superfícies */
+  --sage-50: #f2f6ee;
+  --sage-100: #e7efe0;
+  --sage-200: #d6e2cc;
+  --green-800: #33422c;
+
+  /* Acento único */
+  --terracotta: #aa412a;
+  --terracotta-light: #c68277;
+
+  /* Aliases consumidos pelas utilidades já usadas no código
+     (text-foreground/70, border-border, text-primary) */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --primary: var(--terracotta);
+  --primary-foreground: var(--paper);
+  --border: var(--sage-200);
 }
 
 @utility container {
   margin-inline: auto;
-  padding-inline: 1rem;
+  max-width: 100rem;
+  padding-inline: clamp(1rem, calc(0.82394rem + 0.75117vw), 1.5rem);
 
   @media (width >= 768px) {
     padding-inline: 2rem;
@@ -34,6 +37,10 @@
 
   @media (width >= 1280px) {
     padding-inline: 3rem;
+  }
+
+  @media (width >= 1536px) {
+    padding-inline: 4rem;
   }
 }
 
@@ -44,34 +51,66 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-border: var(--border);
 
-  --font-mono: var(--font-geist-mono);
-  --font-sentient: 'Sentient', sans-serif;
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-sage-50: var(--sage-50);
+  --color-sage-100: var(--sage-100);
+  --color-sage-200: var(--sage-200);
+  --color-green-800: var(--green-800);
+  --color-terracotta: var(--terracotta);
+  --color-terracotta-light: var(--terracotta-light);
 
-  --shadow-glow: 0 0 8px 2px var(--tw-shadow-color);
+  --font-display: var(--font-instrument-serif);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+
+  /* Nomes semânticos: não sequestram rounded-sm/md/lg do Tailwind */
+  --radius-card: 20px;
+  --radius-field: 8px;
+
+  /* Ritmo vertical fluido (py-section / py-section-lg) */
+  --spacing-section: clamp(5rem, calc(3.94366rem + 4.50704vw), 8rem);
+  --spacing-section-lg: clamp(6.25rem, calc(4.92958rem + 5.6338vw), 10rem);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-mono), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-#webgl {
-  top: 0;
-  left: 0;
-  position: fixed;
-  height: 100svh;
-  width: 100%;
-  z-index: 0;
-  pointer-events: none;
+::selection {
+  background: var(--sage-200);
+  color: var(--ink);
 }
 
-#webgl canvas {
-  width: 100%;
-  height: 100%;
+/*
+ * Reveal por scroll. O estado inicial só existe quando o usuário não pediu
+ * movimento reduzido — com `prefers-reduced-motion: reduce` a regra inteira
+ * não se aplica e o conteúdo nasce visível.
+ *
+ * Usa `transform` (não `translate`) de propósito: as utilidades de translate
+ * do Tailwind v4 escrevem na propriedade `translate`, então hover e reveal não
+ * disputam a mesma propriedade.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition:
+      opacity 0.7s var(--ease-out),
+      transform 0.7s var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal][data-revealed] {
+    opacity: 1;
+    transform: none;
+  }
 }

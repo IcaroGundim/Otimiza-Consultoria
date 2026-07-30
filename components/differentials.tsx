@@ -20,29 +20,42 @@ const differentials = [
 
 export function Differentials() {
   return (
-    <section id="diferenciais" className="relative z-10 py-20 md:py-28">
+    <section id="diferenciais" className="py-section">
       <div className="container">
-        <Pill className="mb-6">DIFERENCIAIS</Pill>
-        <h2 className="font-sentient text-3xl sm:text-4xl md:text-5xl max-w-3xl text-balance">
-          Credibilidade técnica com aplicação prática para contextos públicos e
-          empresariais.
-        </h2>
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
+          <div data-reveal>
+            <Pill className="mb-6">DIFERENCIAIS</Pill>
+            <h2 className="font-display text-3xl leading-[1.1] text-balance sm:text-4xl md:text-5xl">
+              Credibilidade técnica com aplicação prática para contextos
+              públicos e empresariais.
+            </h2>
+          </div>
 
-        <div className="grid md:grid-cols-3 gap-5 mt-12">
-          {differentials.map((item) => (
-            <article
-              key={item.title}
-              className="border border-border bg-black/40 backdrop-blur-sm px-6 py-7"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="inline-block size-2 rounded-full bg-primary shadow-glow shadow-primary/40" />
-                <h3 className="font-sentient text-2xl text-balance">{item.title}</h3>
-              </div>
-              <p className="font-mono text-sm text-foreground/70 text-pretty">
-                {item.description}
-              </p>
-            </article>
-          ))}
+          <div>
+            {differentials.map((item, index) => (
+              <article
+                key={item.title}
+                data-reveal
+                style={
+                  { "--reveal-delay": `${index * 110}ms` } as React.CSSProperties
+                }
+                className="grid gap-3 border-t border-sage-200 py-7 last:pb-0 sm:grid-cols-[1fr_1.15fr] sm:gap-10"
+              >
+                <div className="flex items-start gap-3">
+                  <span
+                    aria-hidden
+                    className="mt-3 inline-block size-1.5 shrink-0 rounded-full bg-terracotta"
+                  />
+                  <h3 className="font-display text-2xl text-balance">
+                    {item.title}
+                  </h3>
+                </div>
+                <p className="max-w-[52ch] text-sm text-pretty text-foreground/70">
+                  {item.description}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

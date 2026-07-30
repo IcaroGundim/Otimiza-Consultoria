@@ -1,11 +1,11 @@
 export function Footer() {
   return (
-    <footer className="relative z-10 py-10 border-t border-border/80">
-      <div className="container flex flex-col md:flex-row gap-3 md:gap-6 md:items-center md:justify-between">
-        <p className="font-mono text-xs sm:text-sm text-foreground/60">
+    <footer className="bg-ink py-12 text-paper">
+      <div className="container flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-6">
+        <p className="font-mono text-xs uppercase tracking-[0.18em] text-paper/70">
           Otimiza Consultoria Econômica
         </p>
-        <p className="font-mono text-xs sm:text-sm text-foreground/50">
+        <p className="text-sm text-paper/60">
           Dados e evidências para decisões estratégicas no Acre.
         </p>
       </div>

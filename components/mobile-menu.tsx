@@ -17,6 +17,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
     { name: "Início", href: "/#inicio" },
     { name: "Serviços", href: "/#servicos" },
     { name: "Diferenciais", href: "/#diferenciais" },
+    { name: "Trabalhos", href: "/#trabalhos" },
     { name: "Acre", href: "/#acre" },
     { name: "Contato", href: "/#contato" },
   ];
@@ -30,7 +31,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
       <Dialog.Trigger asChild>
         <button
           className={cn(
-            "group lg:hidden p-2 text-foreground transition-colors",
+            "group lg:hidden p-2 text-ink transition-colors",
             className
           )}
           aria-label="Open menu"
@@ -43,7 +44,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
       <Dialog.Portal>
         <div
           data-overlay="true"
-          className="fixed z-30 inset-0 bg-black/50 backdrop-blur-sm"
+          className="fixed z-30 inset-0 bg-paper/95 backdrop-blur-sm animate-in fade-in duration-200"
         />
 
         <Dialog.Content
@@ -55,7 +56,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
               e.preventDefault();
             }
           }}
-          className="fixed top-0 left-0 w-full z-40 py-28 md:py-40"
+          className="fixed top-0 left-0 w-full z-40 py-28 md:py-40 data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:slide-in-from-top-4 data-[state=open]:duration-300"
         >
           <Dialog.Title className="sr-only">Menu</Dialog.Title>
 
@@ -65,7 +66,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
                 key={item.name}
                 href={item.href}
                 onClick={handleLinkClick}
-                className="text-xl font-mono uppercase text-foreground/60 transition-colors ease-out duration-150 hover:text-foreground/100 py-2"
+                className="py-2 font-mono text-xl uppercase tracking-[0.08em] text-ink/60 transition-colors duration-150 ease-out hover:text-ink"
               >
                 {item.name}
               </Link>
@@ -74,7 +75,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
             <Link
               href="/#contato"
               onClick={handleLinkClick}
-              className="inline-block text-xl font-mono uppercase text-primary transition-colors ease-out duration-150 hover:text-primary/80 py-2"
+              className="inline-block py-2 font-mono text-xl uppercase tracking-[0.08em] text-terracotta transition-colors duration-150 ease-out hover:text-terracotta/80"
             >
               Falar com a Otimiza
             </Link>

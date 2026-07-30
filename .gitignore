@@ -22,3 +22,6 @@
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# PDFs de origem soltos na raiz (a versao publicada vive em public/)
+/*.pdf

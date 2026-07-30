@@ -109,27 +109,30 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contato" className="relative z-10 py-20 md:py-28">
+    <section id="contato" className="bg-sage-50 py-section">
       <div className="container">
-        <div className="border border-border bg-black/55 backdrop-blur-sm p-7 md:p-10 lg:p-12">
-          <Pill className="mb-6">CONTATO</Pill>
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
+        <div
+          data-reveal
+          className="rounded-card border border-sage-200 bg-paper p-7 md:p-10 lg:p-14"
+        >
+          <Pill className="mb-8">CONTATO</Pill>
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
             <div>
-              <h2 className="font-sentient text-3xl sm:text-4xl md:text-5xl text-balance">
+              <h2 className="font-display text-3xl leading-[1.1] text-balance sm:text-4xl md:text-5xl lg:text-6xl">
                 Planeje decisões estratégicas com inteligência econômica
                 orientada por evidências.
               </h2>
-              <p className="font-mono text-sm sm:text-base text-foreground/70 mt-6 text-pretty">
+              <p className="mt-6 max-w-[52ch] text-base text-pretty text-foreground/70">
                 Envie sua demanda e retornaremos com uma proposta técnica
                 alinhada ao contexto da sua instituição no Acre.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="w-full max-w-xl space-y-4">
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-xs uppercase tracking-wide font-mono text-foreground/70 mb-2"
+                  className="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-ink/70"
                 >
                   Nome
                 </label>
@@ -140,7 +143,7 @@ export function ContactSection() {
                   autoComplete="name"
                   value={formData.name}
                   onChange={updateField("name")}
-                  className="w-full h-12 px-4 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
+                  className="h-12 w-full rounded-field border border-sage-200 bg-sage-50 px-4 text-sm text-ink transition-colors placeholder:text-ink/60 focus:border-terracotta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
                   placeholder="Seu nome"
                 />
               </div>
@@ -148,7 +151,7 @@ export function ContactSection() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-xs uppercase tracking-wide font-mono text-foreground/70 mb-2"
+                  className="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-ink/70"
                 >
                   E-mail
                 </label>
@@ -160,7 +163,7 @@ export function ContactSection() {
                   autoComplete="email"
                   value={formData.email}
                   onChange={updateField("email")}
-                  className="w-full h-12 px-4 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
+                  className="h-12 w-full rounded-field border border-sage-200 bg-sage-50 px-4 text-sm text-ink transition-colors placeholder:text-ink/60 focus:border-terracotta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
                   placeholder="voce@instituicao.com.br"
                 />
               </div>
@@ -168,7 +171,7 @@ export function ContactSection() {
               <div>
                 <label
                   htmlFor="organization"
-                  className="block text-xs uppercase tracking-wide font-mono text-foreground/70 mb-2"
+                  className="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-ink/70"
                 >
                   Instituição
                 </label>
@@ -177,7 +180,7 @@ export function ContactSection() {
                   name="organization"
                   value={formData.organization}
                   onChange={updateField("organization")}
-                  className="w-full h-12 px-4 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
+                  className="h-12 w-full rounded-field border border-sage-200 bg-sage-50 px-4 text-sm text-ink transition-colors placeholder:text-ink/60 focus:border-terracotta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
                   placeholder="Órgão, secretaria, empresa ou organização"
                 />
               </div>
@@ -185,7 +188,7 @@ export function ContactSection() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-xs uppercase tracking-wide font-mono text-foreground/70 mb-2"
+                  className="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-ink/70"
                 >
                   Mensagem
                 </label>
@@ -196,7 +199,7 @@ export function ContactSection() {
                   rows={5}
                   value={formData.message}
                   onChange={updateField("message")}
-                  className="w-full px-4 py-3 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors resize-y min-h-36"
+                  className="min-h-36 w-full resize-y rounded-field border border-sage-200 bg-sage-50 px-4 py-3 text-sm text-ink transition-colors placeholder:text-ink/60 focus:border-terracotta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
                   placeholder="Descreva o objetivo do estudo, prazo e contexto."
                 />
               </div>
@@ -209,8 +212,8 @@ export function ContactSection() {
                   className="w-full sm:w-auto"
                 >
                   {status === "submitting"
-                    ? "[Enviando...]"
-                    : "[Enviar solicitação]"}
+                    ? "Enviando..."
+                    : "Enviar solicitação"}
                 </Button>
               </div>
 
@@ -219,8 +222,8 @@ export function ContactSection() {
                   role="status"
                   className={
                     status === "success"
-                      ? "font-mono text-sm text-primary"
-                      : "font-mono text-sm text-red-300"
+                      ? "text-sm text-terracotta"
+                      : "text-sm text-red-700"
                   }
                 >
                   {feedback}
