@@ -60,7 +60,9 @@ export function Particles({
     m.uniforms.initialPositions.value =
       simulationMaterial.uniforms.positions.value;
     return m;
-  }, [simulationMaterial]);
+    // target entra nas deps porque o material guarda target.texture: se o FBO
+    // for recriado (troca de size), o material precisa apontar para o novo.
+  }, [simulationMaterial, target]);
 
   const [scene] = useState(() => new THREE.Scene());
   const [camera] = useState(

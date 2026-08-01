@@ -1,16 +1,21 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+// eslint-config-next 16 já exporta flat config nativo. O FlatCompat do
+// @eslint/eslintrc estoura "Converting circular structure to JSON" aqui.
+// core-web-vitals já inclui next e next/typescript.
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...nextCoreWebVitals,
+  {
+    // Atualizar material.uniforms.X.value dentro do useFrame é o idioma do
+    // react-three-fiber: o loop de render é imperativo e roda a 60fps, então
+    // mutação é obrigatória — passar isso por estado re-renderizaria o React
+    // a cada frame. A regra react-hooks/immutability (React Compiler) não
+    // modela render loop de WebGL e acusa falso positivo aqui.
+    files: ["components/gl/**/*.{ts,tsx}"],
+    rules: {
+      "react-hooks/immutability": "off",
+    },
+  },
   {
     ignores: [
       "node_modules/**",

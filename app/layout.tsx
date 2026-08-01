@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
+import { ScrollReveal } from "@/components/scroll-reveal";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -11,15 +12,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Otimiza Consultoria Econômica",
   description:
-    "Consultoria especializada em análise da conjuntura econômica e social do Acre, com econometria, geoprocessamento e pesquisas eleitorais.",
+    "Ciência de dados, machine learning e geoprocessamento para governos e empresas. Trabalhamos com as bases públicas nacionais e com dados levantados em campo.",
   openGraph: {
     title: "Otimiza Consultoria Econômica",
     description:
-      "Dados e evidências para decisões estratégicas de instituições públicas e empresas no Acre.",
+      "Ciência de dados, machine learning e geoprocessamento para governos e empresas.",
     locale: "pt_BR",
     type: "website",
   },
-  generator: "v0.app",
 };
 
 export default function RootLayout({
@@ -33,8 +33,14 @@ export default function RootLayout({
         className={`${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
+        {/* Sem JS o observer nunca roda, e o conteúdo ficaria invisível. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+
         <Header />
         {children}
+        <ScrollReveal />
       </body>
     </html>
   );

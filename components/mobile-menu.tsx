@@ -17,7 +17,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
     { name: "Início", href: "/#inicio" },
     { name: "Serviços", href: "/#servicos" },
     { name: "Diferenciais", href: "/#diferenciais" },
-    { name: "Acre", href: "/#acre" },
+    { name: "Trabalhos", href: "/#referencia" },
     { name: "Contato", href: "/#contato" },
   ];
 

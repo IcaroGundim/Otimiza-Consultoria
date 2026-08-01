@@ -22,3 +22,7 @@
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local tooling
+/.claude/
+/.hermes/

@@ -1,7 +1,6 @@
 "use client";
 
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Pill } from "./pill";
 import { Button } from "./ui/button";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
@@ -96,7 +95,7 @@ export function ContactSection() {
       }
 
       setStatus("success");
-      setFeedback("Mensagem enviada. Nossa equipe retornará em breve.");
+      setFeedback("Mensagem enviada. Retornamos pelo e-mail informado.");
       setFormData(initialFormData);
     } catch (error) {
       setStatus("error");
@@ -111,58 +110,73 @@ export function ContactSection() {
   return (
     <section id="contato" className="relative z-10 py-20 md:py-28">
       <div className="container">
-        <div className="border border-border bg-black/55 backdrop-blur-sm p-7 md:p-10 lg:p-12">
-          <Pill className="mb-6">CONTATO</Pill>
+        <div
+          data-reveal
+          className="border border-border bg-black/55 backdrop-blur-sm p-7 md:p-10 lg:p-12"
+        >
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
             <div>
-              <h2 className="font-sentient text-3xl sm:text-4xl md:text-5xl text-balance">
-                Planeje decisões estratégicas com inteligência econômica
-                orientada por evidências.
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+                Contato
+              </p>
+              <h2 className="font-sentient text-3xl sm:text-4xl md:text-5xl text-balance mt-4">
+                Conte o que você precisa medir.
               </h2>
               <p className="font-mono text-sm sm:text-base text-foreground/70 mt-6 text-pretty">
-                Envie sua demanda e retornaremos com uma proposta técnica
-                alinhada ao contexto da sua instituição no Acre.
+                Descreva o objetivo, o prazo e a decisão que depende do estudo.
+                Respondemos com escopo, método e prazo.
+              </p>
+              <p className="font-mono text-xs text-foreground/50 mt-10">
+                Prefere escrever direto?{" "}
+                <a
+                  href="mailto:contato@otimizaconsultoria.com.br"
+                  className="text-foreground/70 underline underline-offset-4 decoration-border transition-colors duration-300 ease-out hover:text-primary hover:decoration-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
+                  contato@otimizaconsultoria.com.br
+                </a>
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-xs uppercase tracking-wide font-mono text-foreground/70 mb-2"
-                >
-                  Nome
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  required
-                  autoComplete="name"
-                  value={formData.name}
-                  onChange={updateField("name")}
-                  className="w-full h-12 px-4 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
-                  placeholder="Seu nome"
-                />
-              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-xs uppercase tracking-wide font-mono text-foreground/70 mb-2"
+                  >
+                    Nome
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    required
+                    autoComplete="name"
+                    value={formData.name}
+                    onChange={updateField("name")}
+                    className="w-full h-12 px-4 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
+                    placeholder="Seu nome"
+                  />
+                </div>
 
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-xs uppercase tracking-wide font-mono text-foreground/70 mb-2"
-                >
-                  E-mail
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  value={formData.email}
-                  onChange={updateField("email")}
-                  className="w-full h-12 px-4 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
-                  placeholder="voce@instituicao.com.br"
-                />
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-xs uppercase tracking-wide font-mono text-foreground/70 mb-2"
+                  >
+                    E-mail
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    value={formData.email}
+                    onChange={updateField("email")}
+                    className="w-full h-12 px-4 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
+                    placeholder="voce@instituicao.com.br"
+                  />
+                </div>
               </div>
 
               <div>
@@ -217,6 +231,7 @@ export function ContactSection() {
               {feedback && (
                 <p
                   role="status"
+                  aria-live="polite"
                   className={
                     status === "success"
                       ? "font-mono text-sm text-primary"
