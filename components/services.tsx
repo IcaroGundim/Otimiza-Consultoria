@@ -1,61 +1,87 @@
-import { Pill } from "./pill";
+const romanNumerals = [
+  [10, "X"],
+  [9, "IX"],
+  [5, "V"],
+  [4, "IV"],
+  [1, "I"],
+] as const;
+
+function toRoman(value: number) {
+  let remaining = value;
+  let result = "";
+
+  for (const [number, symbol] of romanNumerals) {
+    while (remaining >= number) {
+      result += symbol;
+      remaining -= number;
+    }
+  }
+
+  return result;
+}
 
 const services = [
   {
-    title: "Econometria Aplicada",
+    title: "Ciência de Dados",
     description:
-      "Modelos econométricos para projetar cenários, avaliar políticas públicas e orientar decisões com maior precisão técnica.",
+      "Integração e limpeza de bases públicas dispersas — IBGE, RAIS, Datasus, portais de transparência — em indicadores comparáveis entre municípios.",
+  },
+  {
+    title: "Machine Learning",
+    description:
+      "Modelos preditivos e de agrupamento: projeção de demanda, classificação de risco e segmentação de municípios por perfil produtivo.",
   },
   {
     title: "Geoprocessamento",
     description:
-      "Análises territoriais e mapeamento de indicadores para identificar dinâmicas regionais e oportunidades estratégicas no Acre.",
+      "Cartografia temática e análise espacial: onde está a produção e por onde ela escoa.",
+  },
+  {
+    title: "Dashboards Interativos",
+    description:
+      "Painéis onde o dado é explorado e explicado: filtros por recorte e período, séries que atualizam na mesma tela e a leitura pronta para quem decide.",
   },
   {
     title: "Pesquisas Eleitorais",
     description:
-      "Estudos quantitativos e qualitativos para leitura de opinião pública, comportamento eleitoral e tendências de voto.",
+      "Intenção de voto, rejeição e avaliação de gestão. Cada número sai com plano amostral, recorte e margem de erro declarados.",
+  },
+  {
+    title: "Capacitação e Treinamento em Análise de Dados",
+    description:
+      "Oficinas e trilhas formativas para equipes técnicas e gestores: leitura crítica de indicadores, Excel avançado, SQL, visualização e comunicação de dados.",
   },
 ];
 
 export function Services() {
   return (
-    <section id="servicos" className="bg-sage-50 py-section">
+    <section id="servicos" className="relative z-10 py-20 md:py-28">
       <div className="container">
-        <div className="grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:items-end lg:gap-20">
-          <div data-reveal>
-            <Pill className="mb-6">SERVIÇOS</Pill>
-            <h2 className="font-display text-3xl leading-[1.1] text-balance sm:text-4xl md:text-5xl">
-              Metodologias robustas para decisões econômicas e sociais
-              orientadas por evidências.
-            </h2>
-          </div>
-          <p
-            data-reveal
-            style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
-            className="max-w-[46ch] text-base text-pretty text-foreground/70 lg:pb-2"
-          >
-            Atuamos com desenho analítico rigoroso e comunicação acessível para
-            transformar dados complexos em inteligência prática para governo e
-            empresas.
-          </p>
-        </div>
+        <h2
+          data-reveal
+          className="font-sentient text-3xl sm:text-4xl md:text-5xl max-w-4xl text-balance"
+        >
+          Seis frentes de trabalho, do desenho da amostra à defesa dos
+          resultados.
+        </h2>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3 md:gap-6">
+        <div className="grid gap-4 md:gap-6 mt-12 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <article
               key={service.title}
               data-reveal
-              style={{ "--reveal-delay": `${index * 110}ms` } as React.CSSProperties}
-              className="group rounded-card border border-sage-200 bg-paper p-7 transition-[border-color,translate] duration-300 ease-out hover:-translate-y-1 hover:border-terracotta/40 md:p-8"
+              style={
+                { "--reveal-delay": `${index * 90}ms` } as React.CSSProperties
+              }
+              className="border border-border bg-black/45 backdrop-blur-sm p-6 md:p-7"
             >
-              <p className="mb-6 font-mono text-xs tracking-[0.18em] text-terracotta">
-                {String(index + 1).padStart(2, "0")}
+              <p className="font-mono text-xs text-primary tracking-[0.14em] mb-5">
+                {toRoman(index + 1)}
               </p>
-              <h3 className="font-display text-2xl text-balance md:text-[1.75rem]">
+              <h3 className="font-sentient text-2xl text-balance">
                 {service.title}
               </h3>
-              <p className="mt-4 text-sm text-pretty text-foreground/70">
+              <p className="font-mono text-sm text-foreground/70 mt-4 text-pretty">
                 {service.description}
               </p>
             </article>

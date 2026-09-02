@@ -1,61 +1,69 @@
+"use client";
+
 import Link from "next/link";
-import { ContourField } from "./contour-field";
 import { FeaturedWork } from "./featured-work";
-import { Pill } from "./pill";
+import { GL } from "./gl";
 import { Button } from "./ui/button";
+import { useState } from "react";
+import { Leva } from "leva";
 
 export function Hero() {
+  const [hovering, setHovering] = useState(false);
   return (
-    <section
-      id="inicio"
-      className="relative isolate flex min-h-[92svh] flex-col justify-center overflow-hidden bg-[radial-gradient(130%_75%_at_50%_0%,var(--sage-50),transparent_70%)] pt-28 pb-section md:pt-32"
-    >
-      <ContourField />
+    <section id="inicio" className="flex flex-col min-h-svh justify-between relative z-10">
+      <GL hovering={hovering} />
+      <Leva hidden />
 
-      {/* z-10 explícito em vez de z-index negativo no canvas: ordenação
-          garantida, sem depender das regras de pintura de índice negativo. */}
-      <div className="container relative z-10">
-        <Pill className="mb-8" data-reveal>
-          OTIMIZA CONSULTORIA ECONÔMICA
-        </Pill>
+      <div className="container pb-16 pt-32 md:pt-40 lg:pt-0 mt-auto -translate-y-8 lg:-translate-y-40 relative">
+        <div className="grid gap-12 lg:grid-cols-[1fr_minmax(0,520px)] lg:items-center lg:gap-16">
+          <div className="text-center lg:text-left">
+            <h1
+              data-reveal
+              className="text-5xl sm:text-6xl md:text-7xl font-sentient text-balance"
+            >
+              Economia regional, <i className="font-light">município a município</i>
+            </h1>
+            <p
+              data-reveal
+              style={{ "--reveal-delay": "90ms" } as React.CSSProperties}
+              className="font-mono text-sm sm:text-base text-foreground/70 text-balance mt-8 max-w-[700px] mx-auto lg:mx-0"
+            >
+              Ciência de dados, machine learning e geoprocessamento para
+              governos e empresas. Trabalhamos com as bases públicas nacionais e
+              com dados levantados em campo.
+            </p>
 
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-20">
-          <h1
+            <div
+              data-reveal
+              style={{ "--reveal-delay": "180ms" } as React.CSSProperties}
+            >
+              <Link className="contents max-sm:hidden" href="/#contato">
+                <Button
+                  className="mt-14"
+                  onMouseEnter={() => setHovering(true)}
+                  onMouseLeave={() => setHovering(false)}
+                >
+                  [Falar com a Otimiza]
+                </Button>
+              </Link>
+              <Link className="contents sm:hidden" href="/#contato">
+                <Button
+                  size="sm"
+                  className="mt-14"
+                  onMouseEnter={() => setHovering(true)}
+                  onMouseLeave={() => setHovering(false)}
+                >
+                  [Falar com a Otimiza]
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          <div
             data-reveal
-            style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
-            className="font-display text-5xl leading-[1.05] tracking-[-0.01em] text-balance sm:text-6xl md:text-7xl"
+            style={{ "--reveal-delay": "270ms" } as React.CSSProperties}
           >
-            Inteligência econômica para{" "}
-            <i className="italic">decisões estratégicas</i> no Acre
-          </h1>
-
-          <div>
-            <div
-              data-reveal
-              style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
-            >
-              <p className="max-w-[46ch] text-base text-pretty text-foreground/70 sm:text-lg">
-                Transformamos dados econômicos e sociais em evidências
-                acionáveis para instituições governamentais e empresariais que
-                lideram o desenvolvimento do Estado do Acre.
-              </p>
-
-              <Button
-                asChild
-                size="sm"
-                className="mt-8 sm:h-12 sm:px-7 sm:text-base"
-              >
-                <Link href="/#contato">Falar com a Otimiza</Link>
-              </Button>
-            </div>
-
-            <div
-              data-reveal
-              style={{ "--reveal-delay": "320ms" } as React.CSSProperties}
-              className="mt-10"
-            >
-              <FeaturedWork />
-            </div>
+            <FeaturedWork />
           </div>
         </div>
       </div>

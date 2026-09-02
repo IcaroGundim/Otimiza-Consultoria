@@ -1,60 +1,78 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { Logo } from "./logo";
 import { MobileMenu } from "./mobile-menu";
-import { Button } from "./ui/button";
 
 const menuItems = [
   { label: "Início", href: "/#inicio" },
   { label: "Serviços", href: "/#servicos" },
   { label: "Diferenciais", href: "/#diferenciais" },
   { label: "Trabalhos", href: "/#trabalhos" },
-  { label: "Acre", href: "/#acre" },
   { label: "Contato", href: "/#contato" },
 ];
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
+  // Sentinela em vez de listener de scroll: o `overflow-x: hidden` do body faz
+  // dele o container de rolagem, então window.scrollY não acompanha a página.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div
-      className={cn(
-        "fixed top-0 left-0 z-50 w-full border-b transition-colors duration-200",
-        scrolled
-          ? "border-sage-200 bg-paper/85 backdrop-blur-md"
-          : "border-transparent bg-transparent"
-      )}
-    >
-      <header className="container flex h-20 items-center justify-between md:h-24">
-        <Link href="/#inicio" aria-label="Ir para o início da página">
-          <Logo className="text-ink" />
-        </Link>
-        <nav className="absolute left-1/2 flex -translate-x-1/2 items-center justify-center gap-x-7 max-lg:hidden">
-          {menuItems.map((item) => (
-            <Link
-              className="inline-block font-mono text-xs uppercase tracking-[0.14em] text-ink/60 transition-colors duration-150 ease-out hover:text-ink"
-              href={item.href}
-              key={item.label}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <Button asChild size="sm" variant="secondary" className="max-lg:hidden">
-          <Link href="/#contato">Contato</Link>
-        </Button>
-        <MobileMenu />
-      </header>
-    </div>
+    <>
+      <div
+        ref={sentinelRef}
+        aria-hidden
+        className="absolute top-0 left-0 h-8 w-px pointer-events-none"
+      />
+
+      <div
+        className={cn(
+          "fixed z-50 top-0 left-0 w-full transition-[padding,background-color,border-color] duration-300 ease-out border-b",
+          scrolled
+            ? "py-4 md:py-5 bg-background/80 backdrop-blur-md border-border"
+            : "pt-8 md:pt-14 pb-4 border-transparent"
+        )}
+      >
+        <header className="flex items-center justify-between container">
+          <Link href="/#inicio" aria-label="Ir para o início da página">
+            <Logo />
+          </Link>
+          <nav className="flex max-lg:hidden absolute left-1/2 -translate-x-1/2 items-center justify-center gap-x-10">
+            {menuItems.map((item) => (
+              <Link
+                className="uppercase inline-block font-mono text-foreground/60 hover:text-foreground/100 duration-150 transition-colors ease-out"
+                href={item.href}
+                key={item.label}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <Link
+            className="uppercase max-lg:hidden transition-colors ease-out duration-150 font-mono text-primary hover:text-primary/80"
+            href="/#contato"
+          >
+            Contato
+          </Link>
+          <MobileMenu />
+        </header>
+      </div>
+    </>
   );
 };
