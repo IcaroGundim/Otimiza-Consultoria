@@ -22,7 +22,7 @@ export function Differentials() {
       <div className="container">
         <h2
           data-reveal
-          className="font-sentient text-3xl sm:text-4xl md:text-5xl max-w-3xl text-balance"
+          className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl max-w-3xl text-balance"
         >
           Nenhum território cabe na própria média.
         </h2>
@@ -41,7 +41,7 @@ export function Differentials() {
         <div
           data-reveal
           style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
-          className="border border-border bg-black/40 backdrop-blur-sm mt-12 px-6 md:px-8"
+          className="border border-border bg-ink/40 backdrop-blur-sm mt-12 px-6 md:px-8"
         >
           {differentials.map((item, index) => (
             <article
@@ -49,10 +49,10 @@ export function Differentials() {
               data-last={index === differentials.length - 1 || undefined}
               className="border-b border-border data-last:border-b-0 grid gap-3 py-7 md:grid-cols-[3.5rem_minmax(0,260px)_1fr] md:gap-12 md:py-8"
             >
-              <p className="font-mono text-xs text-primary tracking-[0.14em] md:pt-2">
+              <p className="font-mono text-xs text-muted tracking-[0.14em] md:pt-2">
                 {String(index + 1).padStart(2, "0")}
               </p>
-              <h3 className="font-sentient text-2xl text-balance">
+              <h3 className="font-display font-semibold text-2xl text-balance">
                 {item.title}
               </h3>
               <p className="font-mono text-sm text-foreground/70 max-w-[70ch] text-pretty">

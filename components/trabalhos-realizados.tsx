@@ -31,7 +31,7 @@ export function TrabalhosRealizados() {
       <div className="container">
         <h2
           data-reveal
-          className="font-sentient text-3xl sm:text-4xl md:text-5xl text-balance"
+          className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl text-balance"
         >
           Trabalhos realizados
         </h2>
@@ -47,18 +47,18 @@ export function TrabalhosRealizados() {
               style={
                 { "--reveal-delay": `${index * 120}ms` } as React.CSSProperties
               }
-              className="group block border border-border bg-black/45 backdrop-blur-sm p-6 md:p-8 text-left transition-colors duration-300 ease-out hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="group block border border-border bg-ink/45 backdrop-blur-sm p-6 md:p-8 text-left transition-colors duration-300 ease-out hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
                 {trabalho.label}
               </p>
-              <h3 className="font-sentient text-2xl mt-3 text-balance">
+              <h3 className="font-display font-semibold text-2xl mt-3 text-balance">
                 {trabalho.title}
               </h3>
               <p className="font-mono text-sm text-foreground/70 mt-3 text-pretty">
                 {trabalho.description}
               </p>
-              <p className="font-mono text-xs uppercase text-foreground/50 mt-6 transition-colors duration-300 ease-out group-hover:text-primary">
+              <p className="font-mono text-xs uppercase text-muted mt-6 transition-colors duration-300 ease-out group-hover:text-primary">
                 {trabalho.cta}
               </p>
             </a>

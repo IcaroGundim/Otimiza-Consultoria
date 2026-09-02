@@ -51,7 +51,7 @@ export const Header = () => {
       >
         <header className="flex items-center justify-between container">
           <Link href="/#inicio" aria-label="Ir para o início da página">
-            <Logo />
+            <Logo variant="compact" className="[--mark:22px] md:[--mark:26px]" />
           </Link>
           <nav className="flex max-lg:hidden absolute left-1/2 -translate-x-1/2 items-center justify-center gap-x-10">
             {menuItems.map((item) => (

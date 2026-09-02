@@ -13,7 +13,7 @@ export function FeaturedWork() {
       href={MAP_PDF}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block border border-border bg-black/45 backdrop-blur-sm p-3 text-left transition-colors duration-300 ease-out hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      className="group block border border-border bg-ink/45 backdrop-blur-sm p-3 text-left transition-colors duration-300 ease-out hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
     >
       <Image
         src="/mapa-potencialidades-acre.png"
@@ -29,13 +29,13 @@ export function FeaturedWork() {
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
           Trabalho em destaque
         </p>
-        <h2 className="font-sentient text-xl mt-2 text-balance">
+        <h2 className="font-display font-semibold text-xl mt-2 text-balance">
           Mapa de Potencialidades do Acre
         </h2>
         <p className="font-mono text-xs text-foreground/70 mt-2 text-pretty">
           Cadeias produtivas e infraestrutura nas cinco regionais do estado.
         </p>
-        <p className="font-mono text-xs uppercase text-foreground/50 mt-4 transition-colors duration-300 ease-out group-hover:text-primary">
+        <p className="font-mono text-xs uppercase text-muted mt-4 transition-colors duration-300 ease-out group-hover:text-primary">
           [Abrir PDF]
         </p>
       </div>

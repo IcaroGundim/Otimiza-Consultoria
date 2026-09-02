@@ -10,24 +10,24 @@ export function ReferenceWork() {
       <div className="container">
         <div
           data-reveal
-          className="border border-border bg-black/45 backdrop-blur-sm p-7 md:p-10 lg:p-12"
+          className="border border-border bg-ink/45 backdrop-blur-sm p-7 md:p-10 lg:p-12"
         >
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
                 Trabalho de referência
               </p>
-              <h2 className="font-sentient text-3xl sm:text-4xl md:text-5xl text-balance mt-4">
+              <h2 className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl text-balance mt-4">
                 O trabalho que melhor mostra o método.
               </h2>
 
               <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-border pt-6">
                 {mapStats.map((stat) => (
                   <div key={stat.label} className="flex flex-col">
-                    <dt className="order-2 font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/50 mt-2">
+                    <dt className="order-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted mt-2">
                       {stat.label}
                     </dt>
-                    <dd className="order-1 font-sentient text-3xl md:text-4xl">
+                    <dd className="order-1 font-display font-semibold text-3xl md:text-4xl">
                       {stat.value}
                     </dd>
                   </div>
@@ -38,7 +38,7 @@ export function ReferenceWork() {
                 href="/mapa-potencialidades-acre.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block font-mono text-xs uppercase text-foreground/50 mt-10 transition-colors duration-300 ease-out hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="inline-block font-mono text-xs uppercase text-muted mt-10 transition-colors duration-300 ease-out hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 [Abrir o mapa em alta resolução]
               </a>

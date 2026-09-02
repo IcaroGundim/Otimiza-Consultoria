@@ -59,7 +59,7 @@ export function Services() {
       <div className="container">
         <h2
           data-reveal
-          className="font-sentient text-3xl sm:text-4xl md:text-5xl max-w-4xl text-balance"
+          className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl max-w-4xl text-balance"
         >
           Seis frentes de trabalho, do desenho da amostra à defesa dos
           resultados.
@@ -73,12 +73,12 @@ export function Services() {
               style={
                 { "--reveal-delay": `${index * 90}ms` } as React.CSSProperties
               }
-              className="border border-border bg-black/45 backdrop-blur-sm p-6 md:p-7"
+              className="border border-border bg-ink/45 backdrop-blur-sm p-6 md:p-7"
             >
-              <p className="font-mono text-xs text-primary tracking-[0.14em] mb-5">
+              <p className="font-mono text-xs text-muted tracking-[0.14em] mb-5">
                 {toRoman(index + 1)}
               </p>
-              <h3 className="font-sentient text-2xl text-balance">
+              <h3 className="font-display font-semibold text-2xl text-balance">
                 {service.title}
               </h3>
               <p className="font-mono text-sm text-foreground/70 mt-4 text-pretty">

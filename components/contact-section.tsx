@@ -112,21 +112,21 @@ export function ContactSection() {
       <div className="container">
         <div
           data-reveal
-          className="border border-border bg-black/55 backdrop-blur-sm p-7 md:p-10 lg:p-12"
+          className="border border-border bg-ink/55 backdrop-blur-sm p-7 md:p-10 lg:p-12"
         >
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
                 Contato
               </p>
-              <h2 className="font-sentient text-3xl sm:text-4xl md:text-5xl text-balance mt-4">
+              <h2 className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl text-balance mt-4">
                 Conte o que você precisa medir.
               </h2>
               <p className="font-mono text-sm sm:text-base text-foreground/70 mt-6 text-pretty">
                 Descreva o objetivo, o prazo e a decisão que depende do estudo.
                 Respondemos com escopo, método e prazo.
               </p>
-              <p className="font-mono text-xs text-foreground/50 mt-10">
+              <p className="font-mono text-xs text-muted mt-10">
                 Prefere escrever direto?{" "}
                 <a
                   href="mailto:contato@otimizaconsultoria.com.br"
@@ -153,7 +153,7 @@ export function ContactSection() {
                     autoComplete="name"
                     value={formData.name}
                     onChange={updateField("name")}
-                    className="w-full h-12 px-4 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
+                    className="w-full h-12 px-4 bg-ink/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
                     placeholder="Seu nome"
                   />
                 </div>
@@ -173,7 +173,7 @@ export function ContactSection() {
                     autoComplete="email"
                     value={formData.email}
                     onChange={updateField("email")}
-                    className="w-full h-12 px-4 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
+                    className="w-full h-12 px-4 bg-ink/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
                     placeholder="voce@instituicao.com.br"
                   />
                 </div>
@@ -191,7 +191,7 @@ export function ContactSection() {
                   name="organization"
                   value={formData.organization}
                   onChange={updateField("organization")}
-                  className="w-full h-12 px-4 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
+                  className="w-full h-12 px-4 bg-ink/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors"
                   placeholder="Órgão, secretaria, empresa ou organização"
                 />
               </div>
@@ -210,7 +210,7 @@ export function ContactSection() {
                   rows={5}
                   value={formData.message}
                   onChange={updateField("message")}
-                  className="w-full px-4 py-3 bg-black/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors resize-y min-h-36"
+                  className="w-full px-4 py-3 bg-ink/40 border border-border text-foreground font-mono text-sm outline-none focus:border-primary transition-colors resize-y min-h-36"
                   placeholder="Descreva o objetivo do estudo, prazo e contexto."
                 />
               </div>
@@ -235,7 +235,7 @@ export function ContactSection() {
                   className={
                     status === "success"
                       ? "font-mono text-sm text-primary"
-                      : "font-mono text-sm text-red-300"
+                      : "font-mono text-sm text-red"
                   }
                 >
                   {feedback}

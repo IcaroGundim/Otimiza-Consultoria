@@ -15,21 +15,22 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Original: preenchimento dourado via box-shadow interno de 54px.
-        default: `${notchClip} bg-background border-primary text-primary-foreground [&>[data-border]]:bg-primary [box-shadow:inset_0_0_54px_0px_var(--tw-shadow-color)] shadow-[#EBB800] hover:shadow-[#EBB800]/80`,
+        // Amarelo dado por dentro, via box-shadow interno de 54px.
+        default: `${notchClip} bg-background border-primary text-primary-foreground [&>[data-border]]:bg-primary [box-shadow:inset_0_0_54px_0px_var(--tw-shadow-color)] shadow-primary hover:shadow-primary/80`,
 
         // Gradiente claro no lugar do brilho interno da `default`: o `inset`
-        // deixava o preto do fundo vazar e acinzentava o bege. O chanfro é
+        // deixava o preto do fundo vazar e acinzentava o papel. O chanfro é
         // clip-path, então sombra externa seria recortada — o efeito mora
         // dentro: gradiente vertical + fio de luz na aresta de cima.
-        sand: `${notchClip} border-sand text-background [&>[data-border]]:bg-sand bg-[linear-gradient(180deg,var(--sand-light)_0%,var(--sand)_58%,var(--sand-dim)_100%)] [box-shadow:inset_0_1px_0_0_rgba(255,255,255,0.65)] hover:bg-[linear-gradient(180deg,#FFFFFF_0%,var(--sand-light)_58%,var(--sand)_100%)]`,
+        // O texto sai em preto tinta, não no preto do fundo.
+        paper: `${notchClip} border-paper text-ink [&>[data-border]]:bg-paper bg-[linear-gradient(180deg,var(--paper-light)_0%,var(--paper)_58%,var(--paper-dim)_100%)] [box-shadow:inset_0_1px_0_0_rgba(255,255,255,0.65)] hover:bg-[linear-gradient(180deg,#FFFFFF_0%,var(--paper-light)_58%,var(--paper)_100%)]`,
 
-        // Contorno bege com o chanfro; preenche no hover.
-        sandOutline: `${notchClip} bg-transparent border-sand text-sand [&>[data-border]]:bg-sand hover:bg-sand hover:text-background`,
+        // Contorno de papel com o chanfro; preenche no hover.
+        paperOutline: `${notchClip} bg-transparent border-paper text-paper [&>[data-border]]:bg-paper hover:bg-paper hover:text-ink`,
 
-        // Bege chapado sem chanfro, cantos retos.
-        sandFlat:
-          "bg-sand border-sand text-background hover:bg-sand-dim hover:border-sand-dim [&>[data-border]]:hidden",
+        // Papel chapado sem chanfro, cantos retos.
+        paperFlat:
+          "bg-paper border-paper text-ink hover:bg-paper-dim hover:border-paper-dim [&>[data-border]]:hidden",
       },
       size: {
         default: "h-16 px-6 text-base",
@@ -37,7 +38,7 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "sand",
+      variant: "paper",
       size: "default",
     },
   }

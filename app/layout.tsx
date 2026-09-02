@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+import { Figtree, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Manual de Marca, 04 Tipografia: Figtree nos títulos e no wordmark,
+// Roboto Mono na assinatura, rótulos e números.
+const figtree = Figtree({
+  variable: "--font-figtree",
   subsets: ["latin"],
+  weight: ["400", "600", "900"],
+  style: ["normal", "italic"],
+});
+
+const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${geistMono.variable} antialiased`}
+        className={`${figtree.variable} ${robotoMono.variable} antialiased`}
         suppressHydrationWarning
       >
         {/* Sem JS o observer nunca roda, e o conteúdo ficaria invisível. */}

@@ -52,7 +52,7 @@ export const GL = ({ hovering }: { hovering: boolean }) => {
           far: 300,
         }}
       >
-        <color attach="background" args={["#000"]} />
+        <color attach="background" args={["#0B0B0B"]} />
         <Particles
           speed={speed}
           aperture={aperture}

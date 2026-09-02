@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!--
+    Símbolo da marca (Manual, 02 Versões: "avatar, favicon").
+    A trama do logo tem passo 9 em uma caixa de 216: reduzida a 32px ela vira
+    borrão. Aqui o passo dobra para 20, então o meio-tom continua legível na
+    aba do navegador.
+  -->
+  <defs>
+    <pattern id="d" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="6.9" fill="#F5F1E8"/>
+    </pattern>
+    <mask id="band" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256">
+      <circle cx="128" cy="128" r="72" fill="none" stroke="#fff" stroke-width="46"/>
+    </mask>
+    <linearGradient id="fade" x1="33" y1="0" x2="223" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/><stop offset="0.34" stop-color="#8a8a8a"/><stop offset="0.72" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="fadeInv" x1="33" y1="0" x2="223" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#000"/><stop offset="0.34" stop-color="#757575"/><stop offset="0.72" stop-color="#fff"/>
+    </linearGradient>
+    <mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256">
+      <rect width="256" height="256" fill="url(#fade)"/>
+    </mask>
+    <mask id="mi" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256">
+      <rect width="256" height="256" fill="url(#fadeInv)"/>
+    </mask>
+  </defs>
+
+  <rect width="256" height="256" fill="#0B0B0B"/>
+  <circle cx="128" cy="128" r="72" fill="none" stroke="#F5F1E8" stroke-width="46" mask="url(#mi)"/>
+  <g mask="url(#band)">
+    <g mask="url(#m)">
+      <rect width="256" height="256" fill="url(#d)"/>
+    </g>
+  </g>
+</svg>

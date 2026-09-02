@@ -19,9 +19,9 @@ export function Hero() {
           <div className="text-center lg:text-left">
             <h1
               data-reveal
-              className="text-5xl sm:text-6xl md:text-7xl font-sentient text-balance"
+              className="text-5xl sm:text-6xl md:text-7xl font-display font-semibold text-balance"
             >
-              Economia regional, <i className="font-light">município a município</i>
+              Economia regional, <i className="font-normal">município a município</i>
             </h1>
             <p
               data-reveal

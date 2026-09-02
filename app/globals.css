@@ -1,31 +1,21 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Sentient';
-  src: url('/Sentient-Extralight.woff') format('woff');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Sentient';
-  src: url('/Sentient-LightItalic.woff') format('woff');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  --primary: #FFC700;
-  --primary-foreground: #ffffff;
-  --border: #424242;
-  /* Bege quente, na mesma família do papel do Mapa de Potencialidades. */
-  --sand: #E8DCC5;
-  --sand-light: #F8F2E5;
-  --sand-dim: #D3C5A9;
+  /* Manual de Marca Otimiza v1 — 03 Cores. */
+  --background: #0B0B0B;
+  --foreground: #F5F1E8; /* Papel */
+  --ink: #111111; /* Preto tinta */
+  --primary: #F2C500; /* Amarelo dado */
+  --primary-ink: #C99A00; /* Amarelo sobre fundo claro, para contraste de texto */
+  --primary-foreground: #111111;
+  --red: #F03A2E; /* Vermelho ponto */
+  --muted: #8A8578;
+  --border: #2A2724;
+
+  /* Família do papel, usada nos botões. */
+  --paper: #F5F1E8;
+  --paper-light: #FFFDF8;
+  --paper-dim: #DDD8CC;
 }
 
 @utility container {
@@ -44,15 +34,19 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
   --color-primary: var(--primary);
+  --color-primary-ink: var(--primary-ink);
   --color-primary-foreground: var(--primary-foreground);
+  --color-red: var(--red);
+  --color-muted: var(--muted);
   --color-border: var(--border);
-  --color-sand: var(--sand);
-  --color-sand-light: var(--sand-light);
-  --color-sand-dim: var(--sand-dim);
+  --color-paper: var(--paper);
+  --color-paper-light: var(--paper-light);
+  --color-paper-dim: var(--paper-dim);
 
-  --font-mono: var(--font-geist-mono);
-  --font-sentient: 'Sentient', sans-serif;
+  --font-mono: var(--font-roboto-mono);
+  --font-display: var(--font-figtree);
 
   --shadow-glow: 0 0 8px 2px var(--tw-shadow-color);
 }
