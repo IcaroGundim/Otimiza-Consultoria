@@ -3,9 +3,9 @@ import { cn } from "@/lib/utils";
 /**
  * Marca Otimiza, conforme o Manual de Marca v1 (ago 2026).
  *
- * São três elementos: o "O" de meio-tom, o wordmark "timiza" e o ponto
- * vermelho. A trama de pontos abre à esquerda e fecha em massa sólida à
- * direita — dado bruto que vira decisão.
+ * São três elementos: o "O" de rede neural, o wordmark "timiza" e o ponto
+ * vermelho. A rede se abre à esquerda em nós e conexões e fecha em massa
+ * sólida à direita — dado bruto que vira decisão.
  *
  * O wordmark é texto vivo (Figtree 900) e não um SVG importado de propósito:
  * um `<img src="*.svg">` é um documento isolado, sem acesso às webfonts da
@@ -24,6 +24,43 @@ const RATIO = {
   sub: 0.153, // corpo do descritor
   subGap: 0.075,
 } as const;
+
+// Malha da rede neural do O, na mesma semente do arquivo "Otimiza Logo" do
+// Claude Design: toda instância desenha a mesma rede. Calculada uma vez no
+// carregamento do módulo. Só entram nós e ligações perto da faixa do anel;
+// o resto seria recortado pela máscara de qualquer jeito.
+const MESH = (() => {
+  let seed = 20260812;
+  const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
+  const step = 15;
+  const all: { x: number; y: number; r: number }[] = [];
+  for (let gx = -12; gx <= 228; gx += step) {
+    for (let gy = -12; gy <= 228; gy += step) {
+      all.push({
+        x: +(gx + (rnd() - 0.5) * step * 0.75).toFixed(2),
+        y: +(gy + (rnd() - 0.5) * step * 0.75).toFixed(2),
+        r: +(2.0 + rnd() * 1.6).toFixed(2),
+      });
+    }
+  }
+  const fromCenter = (x: number, y: number) => Math.hypot(x - 108, y - 108);
+  const edges: [number, number, number, number][] = [];
+  for (let i = 0; i < all.length; i++) {
+    for (let j = i + 1; j < all.length; j++) {
+      const a = all[i];
+      const b = all[j];
+      if (Math.hypot(a.x - b.x, a.y - b.y) < step * 1.5 && rnd() < 0.92) {
+        const mid = fromCenter((a.x + b.x) / 2, (a.y + b.y) / 2);
+        if (mid >= 44 && mid <= 122) edges.push([a.x, a.y, b.x, b.y]);
+      }
+    }
+  }
+  const nodes = all.filter((n) => {
+    const d = fromCenter(n.x, n.y);
+    return d >= 50 && d <= 116;
+  });
+  return { nodes, edges };
+})();
 
 type LogoVariant = "full" | "compact" | "symbol";
 
@@ -46,7 +83,7 @@ export const Logo = ({
   dotColor = "var(--red)",
   subColor = "var(--primary)",
 }: LogoProps) => {
-  // As definições do SVG (pattern, gradiente, máscaras) vivem no documento
+  // As definições do SVG (gradientes e máscaras) vivem no documento
   // inteiro, então dois logos na mesma página colidem de id. A chave vem das
   // cores: instâncias com a mesma cor geram defs idênticas, e aí a colisão é
   // inofensiva — o navegador resolve para algo igual.
@@ -70,16 +107,7 @@ export const Logo = ({
           }}
         >
           <defs>
-            <pattern
-              id={`${uid}Dots`}
-              width="9"
-              height="9"
-              patternUnits="userSpaceOnUse"
-            >
-              <circle cx="4.5" cy="4.5" r="3.1" fill={ink} />
-            </pattern>
-
-            {/* Recorta a faixa do anel: a trama só existe dentro dele. */}
+            {/* Recorta a faixa do anel: a rede só existe dentro dele. */}
             <mask
               id={`${uid}Band`}
               maskUnits="userSpaceOnUse"
@@ -98,7 +126,7 @@ export const Logo = ({
               />
             </mask>
 
-            {/* Um gradiente e seu inverso: a trama entra pela esquerda na
+            {/* Um gradiente e seu inverso: a rede entra pela esquerda na
                 mesma medida em que o anel sólido sai. */}
             <linearGradient id={`${uid}Fade`} x1="0" y1="0" x2="1" y2="0">
               <stop offset="0" stopColor="#ffffff" />
@@ -156,13 +184,19 @@ export const Logo = ({
           />
           <g mask={`url(#${uid}Band)`}>
             <g mask={`url(#${uid}FadeMask)`}>
-              <rect
-                x="-20"
-                y="-20"
-                width="256"
-                height="256"
-                fill={`url(#${uid}Dots)`}
-              />
+              <g
+                stroke={ink}
+                strokeWidth="1.9"
+                strokeLinecap="round"
+                fill="none"
+              >
+                {MESH.edges.map(([x1, y1, x2, y2], i) => (
+                  <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} />
+                ))}
+              </g>
+              {MESH.nodes.map((n, i) => (
+                <circle key={i} cx={n.x} cy={n.y} r={n.r} fill={ink} />
+              ))}
             </g>
           </g>
         </svg>

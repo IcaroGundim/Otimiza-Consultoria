@@ -5,6 +5,7 @@ const contactSchema = z.object({
   name: z.string().trim().min(2).max(120),
   email: z.string().trim().email().max(160),
   organization: z.string().trim().max(160).optional(),
+  service: z.string().trim().max(120).optional(),
   message: z.string().trim().min(20).max(3000),
 });
 
@@ -50,7 +51,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, email, organization, message } = parsed.data;
+  const { name, email, organization, service, message } = parsed.data;
 
   const html = `
     <h2>Novo contato recebido pelo site</h2>
@@ -58,6 +59,9 @@ export async function POST(request: Request) {
     <p><strong>E-mail:</strong> ${escapeHtml(email)}</p>
     <p><strong>Instituição:</strong> ${escapeHtml(
       organization || "Não informada"
+    )}</p>
+    <p><strong>Frente de trabalho:</strong> ${escapeHtml(
+      service || "Não informada"
     )}</p>
     <p><strong>Mensagem:</strong></p>
     <p>${escapeHtml(message).replaceAll("\n", "<br />")}</p>
@@ -68,6 +72,7 @@ export async function POST(request: Request) {
     `Nome: ${name}`,
     `E-mail: ${email}`,
     `Instituição: ${organization || "Não informada"}`,
+    `Frente de trabalho: ${service || "Não informada"}`,
     "Mensagem:",
     message,
   ].join("\n");
